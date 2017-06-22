@@ -38,12 +38,16 @@
 
 				partition@50000 {
 					label = "firmware";
-					reg = <0x50000 0x3b0000>;
+					reg = <0x50000 0x7b0000>;
 				};
 			};
 		};
 
 		gpio1: gpio@660 {
+			status = "okay";
+		};
+		
+		i2c@900 {
 			status = "okay";
 		};
 	};
