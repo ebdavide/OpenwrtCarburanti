@@ -76,6 +76,12 @@ endif
 
 # check prerequisites before starting to build
 prereq: $(target/stamp-prereq) tmp/.prereq_packages
+	-git -C /home/davide/Desktop/display-carburanti fetch
+	-git -C /home/davide/Desktop/display-carburanti pull
+	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/files /home/davide/Desktop/OpenwrtCarburanti/
+	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/www /home/davide/Desktop/OpenwrtCarburanti/files/
+	-chmod 777 -R /home/davide/Desktop/display-carburanti/Openwrt/www /home/davide/Desktop/OpenwrtCarburanti/files/
+	-find /home/davide/Desktop/OpenwrtCarburanti/files/ -type f -print0 | xargs -0 dos2unix
 	@if [ ! -f "$(INCLUDE_DIR)/site/$(ARCH)" ]; then \
 		echo 'ERROR: Missing site config for architecture "$(ARCH)" !'; \
 		echo '       The missing file will cause configure scripts to fail during compilation.'; \
@@ -86,6 +92,7 @@ prereq: $(target/stamp-prereq) tmp/.prereq_packages
 prepare: .config $(tools/stamp-install) $(toolchain/stamp-install)
 world: prepare $(target/stamp-compile) $(package/stamp-compile) $(package/stamp-install) $(target/stamp-install) FORCE
 	$(_SINGLE)$(SUBMAKE) -r package/index
+	-cp /home/davide/Desktop/OpenwrtCarburanti/build_dir/target-mipsel_24kec+dsp_musl-1.1.14/linux-ramips_rt305x/openwrt-ramips-rt305x-rt5350f-olinuxino-evb-squashfs-sysupgrade.bin /home/davide/Desktop/share/
 
 .PHONY: clean dirclean prereq prepare world package/symlinks package/symlinks-install package/symlinks-clean
 
