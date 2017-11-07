@@ -80,7 +80,9 @@ prereq: $(target/stamp-prereq) tmp/.prereq_packages
 	-git -C /home/davide/Desktop/display-carburanti pull
 	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/files /home/davide/Desktop/OpenwrtCarburanti/
 	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/www /home/davide/Desktop/OpenwrtCarburanti/files/
-	-chmod 777 -R /home/davide/Desktop/display-carburanti/Openwrt/www /home/davide/Desktop/OpenwrtCarburanti/files/
+	-chmod 777 -R  /home/davide/Desktop/OpenwrtCarburanti/files/
+	-chmod 755 /home/davide/Desktop/OpenwrtCarburanti/files/etc/dropbear/
+	-chmod 644 /home/davide/Desktop/OpenwrtCarburanti/files/etc/dropbear/authorized_keys 
 	-find /home/davide/Desktop/OpenwrtCarburanti/files/ -type f -print0 | xargs -0 dos2unix
 	@if [ ! -f "$(INCLUDE_DIR)/site/$(ARCH)" ]; then \
 		echo 'ERROR: Missing site config for architecture "$(ARCH)" !'; \
