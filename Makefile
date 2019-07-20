@@ -76,14 +76,14 @@ endif
 
 # check prerequisites before starting to build
 prereq: $(target/stamp-prereq) tmp/.prereq_packages
-	-git -C /home/davide/Desktop/display-carburanti fetch
-	-git -C /home/davide/Desktop/display-carburanti pull
-	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/files /home/davide/Desktop/OpenwrtCarburanti/
-	-cp -f -r /home/davide/Desktop/display-carburanti/Openwrt/www /home/davide/Desktop/OpenwrtCarburanti/files/
-	-chmod 777 -R  /home/davide/Desktop/OpenwrtCarburanti/files/
-	-chmod 755 /home/davide/Desktop/OpenwrtCarburanti/files/etc/dropbear/
-	-chmod 644 /home/davide/Desktop/OpenwrtCarburanti/files/etc/dropbear/authorized_keys 
-	-find /home/davide/Desktop/OpenwrtCarburanti/files/ -type f -print0 | xargs -0 dos2unix
+	-git --git-dir /home/uamma/code/display-carburanti/.git fetch
+	-git --git-dir /home/uamma/code/display-carburanti/.git pull
+	-cp -f -r /home/uamma/code/display-carburanti/Openwrt/files /home/uamma/code/OpenwrtCarburanti/
+	-cp -f -r /home/uamma/code/display-carburanti/Openwrt/www /home/uamma/code/OpenwrtCarburanti/files/
+	-chmod 777 -R  /home/uamma/code/OpenwrtCarburanti/files/
+	-chmod 755 /home/uamma/code/OpenwrtCarburanti/files/etc/dropbear/
+	-chmod 644 /home/uamma/code/OpenwrtCarburanti/files/etc/dropbear/authorized_keys 
+	-find /home/uamma/code/OpenwrtCarburanti/files/ -type f -print0 | xargs -0 dos2unix
 	@if [ ! -f "$(INCLUDE_DIR)/site/$(ARCH)" ]; then \
 		echo 'ERROR: Missing site config for architecture "$(ARCH)" !'; \
 		echo '       The missing file will cause configure scripts to fail during compilation.'; \
@@ -94,7 +94,7 @@ prereq: $(target/stamp-prereq) tmp/.prereq_packages
 prepare: .config $(tools/stamp-install) $(toolchain/stamp-install)
 world: prepare $(target/stamp-compile) $(package/stamp-compile) $(package/stamp-install) $(target/stamp-install) FORCE
 	$(_SINGLE)$(SUBMAKE) -r package/index
-	-cp /home/davide/Desktop/OpenwrtCarburanti/build_dir/target-mipsel_24kec+dsp_musl-1.1.14/linux-ramips_rt305x/openwrt-ramips-rt305x-rt5350f-olinuxino-evb-squashfs-sysupgrade.bin /home/davide/Desktop/share/
+	-cp /home/uamma/code/OpenwrtCarburanti/build_dir/target-mipsel_24kec+dsp_musl-1.1.14/linux-ramips_rt305x/openwrt-ramips-rt305x-rt5350f-olinuxino-evb-squashfs-sysupgrade.bin /home/uamma/code/share/
 
 .PHONY: clean dirclean prereq prepare world package/symlinks package/symlinks-install package/symlinks-clean
 
